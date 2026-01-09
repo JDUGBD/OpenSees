@@ -17,18 +17,17 @@
 **   Filip C. Filippou (filippou@ce.berkeley.edu)                     **
 **                                                                    **
 ** ****************************************************************** */
-                                                                        
+
 // $Revision: 1.1 $
 // $Date: 2010-09-16 00:03:55 $
 // $Source: /usr/local/cvs/OpenSees/SRC/material/uniaxial/InitStressMaterial.h,v $
-                                                      
+
 // Written: fmk
 // Created: Sep 2010
 //
-// Description: This file contains the class definition for 
+// Description: This file contains the class definition for
 // InitStressMaterial.  InitStressMaterial wraps a UniaxialMaterial
 // and imposes an initial strain
-
 
 #ifndef InitStressMaterial_h
 #define InitStressMaterial_h
@@ -37,52 +36,50 @@
 
 class InitStressMaterial : public UniaxialMaterial
 {
-  public:
-    InitStressMaterial(int tag, UniaxialMaterial &material, double sigInit); 
-    InitStressMaterial();
-    ~InitStressMaterial();
-    
-    const char *getClassType(void) const {return "InitStressMaterial";};
+public:
+  InitStressMaterial(int tag, UniaxialMaterial &material, double sigInit);
+  InitStressMaterial();
+  ~InitStressMaterial();
 
-    int setTrialStrain(double strain, double strainRate = 0.0); 
-    double getStrain(void);          
-    double getStrainRate(void);
-    double getStress(void);
-    double getTangent(void);
-    double getDampTangent(void);
-    double getInitialTangent(void) {return theMaterial->getInitialTangent();}
+  const char *getClassType(void) const { return "InitStressMaterial"; };
 
-    int commitState(void);
-    int revertToLastCommit(void);    
-    int revertToStart(void);        
+  int setTrialStrain(double strain, double strainRate = 0.0);
+  double getStrain(void);
+  double getStrainRate(void);
+  double getStress(void);
+  double getTangent(void);
+  double getDampTangent(void);
+  double getInitialTangent(void) { return theMaterial->getInitialTangent(); }
 
-    UniaxialMaterial *getCopy(void);
-    
-    int sendSelf(int commitTag, Channel &theChannel);  
-    int recvSelf(int commitTag, Channel &theChannel, 
-		 FEM_ObjectBroker &theBroker);    
-    
-    void Print(OPS_Stream &s, int flag =0);
-    
-    int setParameter(const char **argv, int argc, Parameter &param);
-    int updateParameter(int parameterID, Information &info);
-  
-    // AddingSensitivity:BEGIN //////////////////////////////////////////
-    double getStressSensitivity(int gradIndex, bool conditional);
-    double getInitialTangentSensitivity(int gradIndex);
-    int commitSensitivity(double strainGradient, int gradIndex, int numGrads);
-    // AddingSensitivity:END ///////////////////////////////////////////
+  int commitState(void);
+  int revertToLastCommit(void);
+  int revertToStart(void);
 
-  protected:
-    
-  private:
-    UniaxialMaterial *theMaterial;
-    double epsInit;
-    double sigInit;
+  UniaxialMaterial *getCopy(void);
 
-    int findInitialStrain(void);
+  int sendSelf(int commitTag, Channel &theChannel);
+  int recvSelf(int commitTag, Channel &theChannel,
+               FEM_ObjectBroker &theBroker);
+
+  void Print(OPS_Stream &s, int flag = 0);
+
+  int setParameter(const char **argv, int argc, Parameter &param);
+  int updateParameter(int parameterID, Information &info);
+
+  // AddingSensitivity:BEGIN //////////////////////////////////////////
+  double getStressSensitivity(int gradIndex, bool conditional);
+  double getInitialTangentSensitivity(int gradIndex);
+  int commitSensitivity(double strainGradient, int gradIndex, int numGrads);
+  // AddingSensitivity:END ///////////////////////////////////////////
+
+protected:
+private:
+  UniaxialMaterial *theMaterial;
+  double epsInit;
+  double sigInit;
+  bool compute_initial_strain;
+
+  int findInitialStrain(void);
 };
 
-
 #endif
-

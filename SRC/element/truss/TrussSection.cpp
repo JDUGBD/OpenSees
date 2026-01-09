@@ -1180,8 +1180,8 @@ TrussSection::getResponse(int responseID, Information &eleInfo)
       force = 0.0;
       int i;
       for (i = 0; i < order; i++) {
-	if (code(i) == SECTION_RESPONSE_P)
-	  force += s(i);
+	        if (code(i) == SECTION_RESPONSE_P)
+	            force += s(i);
       }
 
       P(numDOF/2) = force;

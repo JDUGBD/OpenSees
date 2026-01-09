@@ -949,7 +949,22 @@ CorotTrussSection::setResponse(const char **argv, int argc, OPS_Stream &output)
             }
             theResponse =  new ElementResponse(this, 1, Vector(numDOF));
 
-    } else if ((strcmp(argv[0],"axialForce") == 0) || (strcmp(argv[0],"basicForce") == 0) || 
+    }
+    else if ((strcmp(argv[0], "localForce") == 0) || (strcmp(argv[0], "localForces") == 0))
+    {
+        char outputData[10];
+        int numDOFperNode = numDOF / 2;
+        for (int i = 0; i < numDOFperNode; i++) {
+            sprintf(outputData, "P1_%d", i + 1);
+            output.tag("ResponseType", outputData);
+        }
+        for (int j = 0; j < numDOFperNode; j++) {
+            sprintf(outputData, "P2_%d", j + 1);
+            output.tag("ResponseType", outputData);
+        }
+        theResponse = new ElementResponse(this, 11, Vector(numDOF));
+    }
+    else if ((strcmp(argv[0],"axialForce") == 0) || (strcmp(argv[0],"basicForce") == 0) || 
         (strcmp(argv[0],"basicForces") == 0)) {
             output.tag("ResponseType", "N");
             theResponse =  new ElementResponse(this, 2, 0.0);
@@ -1006,6 +1021,24 @@ CorotTrussSection::getResponse(int responseID, Information &eleInfo)
     case 1:
         return eleInfo.setVector(this->getResistingForce());
 
+    case 11: {
+        Vector P(numDOF);
+        int order = theSection->getOrder();
+        const ID& code = theSection->getType();
+
+        const Vector& s = theSection->getStressResultant();
+        force = 0.0;
+        int i;
+        for (i = 0; i < order; i++) {
+			int hh = code(i);
+            if (code(i) == SECTION_RESPONSE_P)
+                force += s(i);
+        }
+
+        P(numDOF / 2) = force;
+        P(0) = -P(numDOF / 2);
+        return eleInfo.setVector(P);
+    }
     case 2:
         if (Lo == 0.0) {
             strain = 0.0;
