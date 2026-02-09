@@ -25,9 +25,10 @@
 // Written: fmk
 // Created: Sep 2010
 //
-// Description: This file contains the class definition for
+// Description: This file contains the class definition for 
 // InitStressMaterial.  InitStressMaterial wraps a UniaxialMaterial
 // and imposes an initial strain
+
 
 #ifndef InitStressMaterial_h
 #define InitStressMaterial_h
@@ -37,49 +38,52 @@
 class InitStressMaterial : public UniaxialMaterial
 {
 public:
-  InitStressMaterial(int tag, UniaxialMaterial &material, double sigInit);
-  InitStressMaterial();
-  ~InitStressMaterial();
+    InitStressMaterial(int tag, UniaxialMaterial& material, double sigInit);
+    InitStressMaterial();
+    ~InitStressMaterial();
 
-  const char *getClassType(void) const { return "InitStressMaterial"; };
+    const char* getClassType(void) const { return "InitStressMaterial"; };
 
-  int setTrialStrain(double strain, double strainRate = 0.0);
-  double getStrain(void);
-  double getStrainRate(void);
-  double getStress(void);
-  double getTangent(void);
-  double getDampTangent(void);
-  double getInitialTangent(void) { return theMaterial->getInitialTangent(); }
+    int setTrialStrain(double strain, double strainRate = 0.0);
+    double getStrain(void);
+    double getStrainRate(void);
+    double getStress(void);
+    double getTangent(void);
+    double getDampTangent(void);
+    double getInitialTangent(void) { return theMaterial->getInitialTangent(); }
 
-  int commitState(void);
-  int revertToLastCommit(void);
-  int revertToStart(void);
+    int commitState(void);
+    int revertToLastCommit(void);
+    int revertToStart(void);
 
-  UniaxialMaterial *getCopy(void);
+    UniaxialMaterial* getCopy(void);
 
-  int sendSelf(int commitTag, Channel &theChannel);
-  int recvSelf(int commitTag, Channel &theChannel,
-               FEM_ObjectBroker &theBroker);
+    int sendSelf(int commitTag, Channel& theChannel);
+    int recvSelf(int commitTag, Channel& theChannel,
+        FEM_ObjectBroker& theBroker);
 
-  void Print(OPS_Stream &s, int flag = 0);
+    void Print(OPS_Stream& s, int flag = 0);
 
-  int setParameter(const char **argv, int argc, Parameter &param);
-  int updateParameter(int parameterID, Information &info);
+    int setParameter(const char** argv, int argc, Parameter& param);
+    int updateParameter(int parameterID, Information& info);
 
-  // AddingSensitivity:BEGIN //////////////////////////////////////////
-  double getStressSensitivity(int gradIndex, bool conditional);
-  double getInitialTangentSensitivity(int gradIndex);
-  int commitSensitivity(double strainGradient, int gradIndex, int numGrads);
-  // AddingSensitivity:END ///////////////////////////////////////////
+    // AddingSensitivity:BEGIN //////////////////////////////////////////
+    double getStressSensitivity(int gradIndex, bool conditional);
+    double getInitialTangentSensitivity(int gradIndex);
+    int commitSensitivity(double strainGradient, int gradIndex, int numGrads);
+    // AddingSensitivity:END ///////////////////////////////////////////
 
 protected:
-private:
-  UniaxialMaterial *theMaterial;
-  double epsInit;
-  double sigInit;
-  bool compute_initial_strain;
 
-  int findInitialStrain(void);
+private:
+    UniaxialMaterial* theMaterial;
+    double epsInit;
+    double sigInit;
+    bool compute_initial_strain;
+
+    int findInitialStrain(void);
 };
 
+
 #endif
+

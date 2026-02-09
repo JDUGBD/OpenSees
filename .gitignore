@@ -91,3 +91,6 @@ build
 bin
 __pycache__
 *.dat
+
+# TCLtesting files
+Win64/bin/scriptTesting/*.tcl

@@ -235,6 +235,7 @@
     <ClCompile Include="..\..\..\SRC\element\forceBeamColumn\SimpsonBeamIntegration.cpp" />
     <ClCompile Include="..\..\..\SRC\element\fourNodeQuad\EightNodeQuad.cpp" />
     <ClCompile Include="..\..\..\SRC\element\fourNodeQuad\NineNodeQuad.cpp" />
+    <ClCompile Include="..\..\..\SRC\element\fourNodeQuad\quadEmbedded.cpp" />
     <ClCompile Include="..\..\..\SRC\element\fourNodeQuad\SixNodeTri.cpp" />
     <ClCompile Include="..\..\..\SRC\element\frictionBearing\FPBearingPTV.cpp" />
     <ClCompile Include="..\..\..\SRC\element\frictionBearing\TripleFrictionPendulumX.cpp" />
@@ -297,6 +298,7 @@
     <ClCompile Include="..\..\..\SRC\element\PML\PML2DVISCOUS.cpp" />
     <ClCompile Include="..\..\..\SRC\element\PML\PML3DVISCOUS.cpp" />
     <ClCompile Include="..\..\..\SRC\element\RockingBC\RockingBC.cpp" />
+    <ClCompile Include="..\..\..\SRC\element\shell\embeddedShell.cpp" />
     <ClCompile Include="..\..\..\SRC\element\shell\ShellDKGQ.cpp" />
     <ClCompile Include="..\..\..\SRC\element\shell\ShellDKGT.cpp" />
     <ClCompile Include="..\..\..\SRC\element\shell\ShellMITC4Thermal.cpp" />
@@ -552,6 +554,7 @@
     <ClInclude Include="..\..\..\SRC\element\forceBeamColumn\SimpsonBeamIntegration.h" />
     <ClInclude Include="..\..\..\SRC\element\fourNodeQuad\EightNodeQuad.h" />
     <ClInclude Include="..\..\..\SRC\element\fourNodeQuad\NineNodeQuad.h" />
+    <ClInclude Include="..\..\..\SRC\element\fourNodeQuad\quadEmbedded.h" />
     <ClInclude Include="..\..\..\SRC\element\fourNodeQuad\SixNodeTri.h" />
     <ClInclude Include="..\..\..\SRC\element\frictionBearing\FPBearingPTV.h" />
     <ClInclude Include="..\..\..\SRC\element\gradientInelasticBeamColumn\GradientInelasticBeamColumn2d.h" />
@@ -604,6 +607,7 @@
     <ClInclude Include="..\..\..\SRC\element\PML\PML2DVISCOUS.h" />
     <ClInclude Include="..\..\..\SRC\element\PML\PML3DVISCOUS.h" />
     <ClInclude Include="..\..\..\SRC\element\RockingBC\RockingBC.h" />
+    <ClInclude Include="..\..\..\SRC\element\shell\embeddedShell.h" />
     <ClInclude Include="..\..\..\SRC\element\shell\ShellDKGQ.h" />
     <ClInclude Include="..\..\..\SRC\element\shell\ShellDKGT.h" />
     <ClInclude Include="..\..\..\SRC\element\shell\ShellMITC4Thermal.h" />

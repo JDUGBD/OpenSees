@@ -116,6 +116,7 @@ extern void *OPS_MultiFP2d(void);
 extern void *OPS_CoupledZeroLength(void);
 extern void *OPS_FourNodeQuad3d(void);
 extern void *OPS_Tri31(const ID &info);
+extern void* OPS_quadEmbedded(void);
 extern void *OPS_SSPquad(void);
 extern void *OPS_SSPquadUP(void);
 extern void *OPS_SSPbrick(void);
@@ -127,6 +128,7 @@ extern void *OPS_ShellNLDKGQ(void);   //Added by Lisha Wang, Xinzheng Lu, Linlin
 extern void *OPS_ShellDKGT(void);     //Added by Shuhao Zhang and  Xinzheng Lu 
 extern void *OPS_ShellNLDKGT(void);   //Added by Shuhao Zhang and  Xinzheng Lu 
 extern void *OPS_ASDShellQ4(void);   // Massimo Petracca (ASDEA)
+extern void* OPS_embeddedShell(void);   
 extern void *OPS_ASDShellT3(void);   // Massimo Petracca (ASDEA)
 extern void *OPS_Quad4FiberOverlay(void);
 extern void *OPS_Brick8FiberOverlay(void);
@@ -1097,7 +1099,19 @@ TclModelBuilderElementCommand(ClientData clientData, Tcl_Interp *interp,
       return TCL_ERROR;
     }
     
-  } else if (strcmp(argv[1],"ASDShellT3") == 0) {
+  }
+  else if (strcmp(argv[1], "embeddedShell") == 0) {
+
+      void* theEle = OPS_embeddedShell();
+      if (theEle != 0)
+          theElement = (Element*)theEle;
+      else {
+          opserr << "TclElementCommand -- unable to create element of type : " << argv[1] << endln;
+          return TCL_ERROR;
+      }
+
+      }
+  else if (strcmp(argv[1],"ASDShellT3") == 0) {
     
     void *theEle = OPS_ASDShellT3();
     if (theEle != 0) 
@@ -1168,7 +1182,17 @@ TclModelBuilderElementCommand(ClientData clientData, Tcl_Interp *interp,
       return TCL_ERROR;
     }
 
-  } else if ((strcmp(argv[1],"SSPquad") == 0) || (strcmp(argv[1],"SSPQuad") == 0)) {
+  }
+  else if ((strcmp(argv[1], "quadEmbedded") == 0) || (strcmp(argv[1], "quadEmbedded") == 0)) {
+      void* theEle = OPS_quadEmbedded();
+      if (theEle != 0)
+          theElement = (Element*)theEle;
+      else {
+          opserr << "TclElementCommand -- unable to create an element of type: " << argv[1] << endln;
+      }
+
+  }
+  else if ((strcmp(argv[1], "SSPquad") == 0) || (strcmp(argv[1], "SSPQuad") == 0)) {
     
     void *theEle = OPS_SSPquad();
     if (theEle != 0) 

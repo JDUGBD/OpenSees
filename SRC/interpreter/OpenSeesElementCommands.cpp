@@ -48,6 +48,7 @@ UPDATES, ENHANCEMENTS, OR MODIFICATIONS.
 #include <Block2D.h>
 #include <Block3D.h>
 #include <FourNodeQuad.h>
+// #include <quadEmbedded.h>
 #include <SectionForceDeformation.h>
 #include <ConstantPressureVolumeQuad.h>
 #include <EnhancedQuad.h>
@@ -181,6 +182,7 @@ void* OPS_ElasticForceBeamColumn2d();
 void* OPS_ElasticForceBeamColumn3d();
 void* OPS_DispBeamColumn3dWithSensitivity();
 void* OPS_DispBeamColumn2dWithSensitivity();
+//void* OPS_quadEmbedded();
 void* OPS_FourNodeQuad();
 void* OPS_FourNodeQuadWithSensitivity();
 void* OPS_EnhancedQuad();
@@ -647,6 +649,7 @@ namespace {
 	functionMap.insert(std::make_pair("stdBrick", &OPS_Brick));
 	functionMap.insert(std::make_pair("bbarBrickUP", &OPS_BBarBrickUP));
 	functionMap.insert(std::make_pair("bbarQuadUP", &OPS_BBarFourNodeQuadUP));
+	//functionMap.insert(std::make_pair("quadEmbedded", &OPS_quadEmbedded));
 	functionMap.insert(std::make_pair("20NodeBrick", &OPS_Twenty_Node_Brick));
 	functionMap.insert(std::make_pair("20_8_BrickUP", &OPS_TwentyEightNodeBrickUP));
 	functionMap.insert(std::make_pair("9_4_QuadUP", &OPS_NineFourNodeQuadUP));
@@ -1144,7 +1147,29 @@ int OPS_doBlock2D()
 		theEle = new FourNodeQuad(eleID,nd1,nd2,nd3,nd4,*mat,subtype,thick);
 
 
-	    } else if (strcmp(type, "ShellMITC4") == 0 || strcmp(type, "shellMITC4") == 0 ||
+		}
+		/*else if (strcmp(type, "quadEmbedded") == 0) {
+
+			if (numEleNodes != 4) {
+				opserr << "WARNING quadEmbedded element only needs four nodes\n";
+				return -1;
+			}
+
+			NDMaterial* mat = OPS_getNDMaterial(matTag);
+			if (mat == 0) {
+				opserr << "WARNING material not found\n";
+				opserr << "Material: " << matTag;
+				opserr << "\nFourNodeQuad \n";
+				return -1;
+			}
+			int nd1 = nodeTags(0) + idata[2];
+			int nd2 = nodeTags(1) + idata[2];
+			int nd3 = nodeTags(2) + idata[2];
+			int nd4 = nodeTags(3) + idata[2];
+			theEle = new quadEmbedded(eleID, nd1, nd2, nd3, nd4, *mat, subtype, thick);
+
+		}*/
+		else if (strcmp(type, "ShellMITC4") == 0 || strcmp(type, "shellMITC4") == 0 ||
 		       strcmp(type, "shell") == 0 || strcmp(type, "Shell") == 0) {
 
 		if (numEleNodes != 4) {

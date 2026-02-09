@@ -360,6 +360,7 @@ FE_Element::addKtToTang(double fact)
 	{
 	    const Matrix& Kt = myEle->getTangentStiff();
 	    theTangent->addMatrix(1.0, Kt,fact);
+
 	}
 	else {
 	    opserr << "WARNING FE_Element::addKToTang() - ";

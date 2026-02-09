@@ -319,6 +319,8 @@
     <ClCompile Include="..\..\..\SRC\element\shell\ShellNLDKGTThermal.cpp" />
     <ClCompile Include="..\..\..\SRC\element\pipe\CurvedPipe.cpp" />
     <ClCompile Include="..\..\..\SRC\element\pipe\Pipe.cpp" />
+    <ClCompile Include="..\..\..\SRC\element\fourNodeQuad\quadEmbedded.cpp" />
+    <ClCompile Include="..\..\..\SRC\element\shell\embeddedShell.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\OTHER\tetgen1.4.3\tetgen.h" />
@@ -598,5 +600,7 @@
     <ClInclude Include="..\..\..\SRC\element\NewElement.h" />
     <ClInclude Include="..\..\..\SRC\element\forceBeamColumn\ForceBeamColumn3dThermal.h" />
     <ClInclude Include="..\..\..\SRC\element\shell\ShellNLDKGTThermal.h" />
+    <ClInclude Include="..\..\..\SRC\element\fourNodeQuad\quadEmbedded.h" />
+    <ClInclude Include="..\..\..\SRC\element\shell\embeddedShell.h" />
   </ItemGroup>
 </Project>
