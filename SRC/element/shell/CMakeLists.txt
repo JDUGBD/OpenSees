@@ -19,6 +19,7 @@ target_sources(OPS_Element
         ShellNLDKGQThermal.cpp
         ShellNLDKGT.cpp
         ShellNLDKGTThermal.cpp
+        embeddedShell.cpp
     PUBLIC
         ASDEICR.h
         ASDMath.h
@@ -40,6 +41,7 @@ target_sources(OPS_Element
         ShellNLDKGQThermal.h
         ShellNLDKGT.h
         ShellNLDKGTThermal.h
+        embeddedShell.h
 )
 target_include_directories(OPS_Element PUBLIC ${CMAKE_CURRENT_LIST_DIR})
 
